@@ -1,5 +1,4 @@
 # Sql-Project
-----Project 1-------
  Bookstore Management System
 
  Project Overview
@@ -92,7 +91,7 @@ Through this project, the following concepts were practiced:
 Developed as part of SQL database practice and academic learning.
 
 =============================================================================================================================
--------Project 2-------
+
 Diet Management System
 Project Overview
 
