@@ -92,154 +92,315 @@ Developed as part of SQL database practice and academic learning.
 
 =============================================================================================================================
 
-Diet Management System
-Project Overview
+# SQL PROJECT
+# DIET MANAGEMENT SYSTEM
 
-The Diet Management System is a relational database project developed using MySQL.
+## • Project Overview
 
-This project is designed to manage diet planning activities such as maintaining user information, dietitians, diet plans, meals, food items, and diet plan assignments.
+• The Diet Management System is a relational database project developed using MySQL.
 
-The database demonstrates the implementation of:
+• It is designed to manage users, dietitians, diet plans, meals, and food items efficiently.
 
-Table creation
-Primary and foreign keys
-Strong and weak entities
-Data insertion
-Relationships between tables
-SQL queries of different difficulty levels
-Technologies Used
-MySQL
-SQL
-Database Tables
+• The system helps in organizing nutritional information and tracking diet plans assigned to users.
+
+• The project demonstrates the practical implementation of:
+  - Table Creation
+  - Primary Keys
+  - Foreign Keys
+  - Strong and Weak Entities
+  - Data Insertion
+  - Relationships Between Tables
+  - SQL Queries of Different Levels
+
+------------------------------------------------------------
+
+## • Technologies Used
+
+• MySQL
+
+• SQL
+
+------------------------------------------------------------
+
+## • Database Tables
 
 The project contains the following tables:
 
-Users
-Dietitians
-Diet_Plans
-User_Diet_Plan
-Meals
-Food_Items
-Entity Classification
-Strong Entities
-Users
-Dietitians
-Diet_Plans
-Associative Entity
-User_Diet_Plan
-Weak Entities
-Meals
-Food_Items
-Relationships
-One Dietitian can create multiple Diet Plans (1:N)
-One Diet Plan can contain multiple Meals (1:N)
-One Meal can contain multiple Food Items (1:N)
-One User can be assigned a Diet Plan
-Multiple Users can follow the same Diet Plan
-User_Diet_Plan acts as a bridge table between Users and Diet Plans
-SQL Queries Included
-Easy Level Queries
+• Users
 
-Queries using:
+• Dietitians
 
-SELECT
-WHERE clause
-ORDER BY
-COUNT()
-LIMIT
+• Diet_Plans
 
-Examples:
+• User_Diet_Plan
 
-List all users
-Find a user's email
-Display diet plans below a calorie limit
-Count female users
-Intermediate Level Queries
+• Meals
 
-Queries using:
+• Food_Items
 
-INNER JOIN
-GROUP BY
-Aggregate Functions
-Date Filtering
+------------------------------------------------------------
 
-Examples:
+## • Entity Classification
 
-Display users with assigned diet plans
-Show dietitians with their plans
-Count food items in meals
-Retrieve January assignments
-Hard Level Queries
+### Strong Entities
 
-Queries using:
+• Users
 
-Multiple Table JOINS
-GROUP BY
-HAVING
-ORDER BY
-Aggregate Functions
-Subqueries
+• Dietitians
+
+• Diet_Plans
+
+### Associative Entity
+
+• User_Diet_Plan
+
+### Weak Entities
+
+• Meals
+
+• Food_Items
+
+------------------------------------------------------------
+
+## • Relationships
+
+• One Dietitian can create multiple Diet Plans (1:N)
+
+• One Diet Plan can contain multiple Meals (1:N)
+
+• One Meal can contain multiple Food Items (1:N)
+
+• Multiple Users can follow the same Diet Plan
+
+• User_Diet_Plan acts as a bridge table between Users and Diet Plans
+
+------------------------------------------------------------
+
+## • SQL Queries Included
+
+### Easy Level Queries
+
+• SELECT
+
+• WHERE
+
+• ORDER BY
+
+• COUNT()
+
+• LIMIT
 
 Examples:
 
-Most popular diet plan
-Highest calorie diet plan
-User assigned to highest calorie plan
-Dietitian managing maximum users
-Features
-Proper relational database design
-Use of primary and foreign keys
-Strong and weak entity implementation
-Data analysis using SQL queries
-ER Diagram included
-Sample records inserted for testing
-Supports diet planning and nutrition tracking
-Learning Outcomes
+• List all users
+
+• Find a user's email
+
+• Display diet plans below a calorie limit
+
+• Count female users
+
+------------------------------------------------------------
+
+### Intermediate Level Queries
+
+• INNER JOIN
+
+• GROUP BY
+
+• Aggregate Functions
+
+• Date Filtering
+
+Examples:
+
+• Display users with assigned diet plans
+
+• Show dietitians with their plans
+
+• Count food items in meals
+
+• Retrieve users assigned during a specific period
+
+------------------------------------------------------------
+
+### Advanced Level Queries
+
+• Multiple Table JOINS
+
+• GROUP BY
+
+• HAVING
+
+• ORDER BY
+
+• Aggregate Functions
+
+• Subqueries
+
+Examples:
+
+• Most popular diet plan
+
+• Highest calorie diet plan
+
+• User assigned to the highest calorie plan
+
+• Dietitian handling maximum users
+
+------------------------------------------------------------
+
+## • Features
+
+• Proper relational database design
+
+• Use of Primary and Foreign Keys
+
+• Implementation of Strong and Weak Entities
+
+• Data analysis using SQL queries
+
+• ER Diagram representation
+
+• Sample records for testing
+
+• Nutrition and calorie tracking
+
+------------------------------------------------------------
+
+## • Learning Outcomes
 
 Through this project, the following concepts were practiced:
 
-Database normalization
-ER Diagram design
-Strong and Weak Entities
-Primary and Foreign Keys
-Table relationships
-SQL query writing
-Aggregate functions
-Joins and relational analysis
-Database design principles
-Project Workflow
-Users register in the system.
-Dietitians create diet plans based on nutritional goals.
-Diet plans are assigned to users.
-Each diet plan contains multiple meals.
-Each meal contains multiple food items.
-The system tracks calories and meal information.
-SQL queries are used to analyze user diets and plan effectiveness.
-Sample Data
+• Database Normalization
 
-The project contains:
+• ER Diagram Design
 
-10 Users
-10 Dietitians
-10 Diet Plans
-10 User_Diet_Plan Assignments
-10 Meals
-10 Food Items
+• Primary and Foreign Keys
 
-Total Records: 60
+• Strong and Weak Entities
 
-Learning Concepts Demonstrated
-Relational Database Management System (RDBMS)
-One-to-Many Relationships
-Many-to-Many Relationships (through bridge table)
-Strong and Weak Entities
-SQL Constraints
-Aggregate Functions
-Joins
-Grouping and Filtering
-Database Query Optimization Basics
+• One-to-Many Relationships
 
-Author
-Developed as part of SQL Database Practice, DBMS Mini Project, and Academic Learning.
+• Many-to-Many Relationships
 
+• SQL Query Writing
+
+• Aggregate Functions
+
+• Joins and Relational Analysis
+
+• Database Design Principles
+
+------------------------------------------------------------
+
+## • Project Workflow
+
+• Step 1: User registers in the system.
+
+• Step 2: Dietitian creates diet plans based on health goals.
+
+• Step 3: Diet plans are assigned to users.
+
+• Step 4: Each diet plan contains multiple meals.
+
+• Step 5: Each meal contains multiple food items.
+
+• Step 6: Calories and nutritional details are stored.
+
+• Step 7: SQL queries are used to analyze and manage diet information.
+
+------------------------------------------------------------
+
+## • Sample Data
+
+• 10 Users
+
+• 10 Dietitians
+
+• 10 Diet Plans
+
+• 10 User_Diet_Plan Assignments
+
+• 10 Meals
+
+• 10 Food Items
+
+• Total Records: 60
+
+------------------------------------------------------------
+
+## • Concepts Demonstrated
+
+• Relational Database Management System (RDBMS)
+
+• Strong Entities
+
+• Weak Entities
+
+• Primary Keys
+
+• Foreign Keys
+
+• One-to-Many Relationships
+
+• Many-to-Many Relationships
+
+• Aggregate Functions
+
+• SQL Joins
+
+• SQL Constraints
+
+• Data Analysis Using SQL
+
+------------------------------------------------------------
+
+## • Advantages of the System
+
+• Efficient management of diet plans
+
+• Easy tracking of users and nutrition details
+
+• Reduces manual record maintenance
+
+• Supports personalized diet recommendations
+
+• Helps monitor calorie intake
+
+• Provides structured diet information
+
+------------------------------------------------------------
+
+## • Future Enhancements
+
+• BMI Calculation Module
+
+• Daily Progress Tracking
+
+• Diet Recommendation System
+
+• Mobile Application Integration
+
+• User Login and Authentication
+
+• Automated Health Reports
+
+------------------------------------------------------------
+
+## • Author
+
+• Developed as part of SQL Database Practice, DBMS Mini Project, and Academic Learning.
+
+------------------------------------------------------------
+
+## • Project Summary
+
+• The Diet Management System is a MySQL-based relational database project.
+
+• It manages users, dietitians, diet plans, meals, and food items.
+
+• The project demonstrates concepts such as Strong and Weak Entities, Primary and Foreign Keys, Relationships, Joins, Aggregate Functions, and SQL-based Data Analysis.
+
+• It provides an efficient way to organize, assign, and track personalized diet plans and nutritional information.
 
