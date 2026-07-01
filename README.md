@@ -92,7 +92,6 @@ Developed as part of SQL database practice and academic learning.
 
 =============================================================================================================================
 
-# SQL PROJECT
 # DIET MANAGEMENT SYSTEM
 
 ## • Project Overview
