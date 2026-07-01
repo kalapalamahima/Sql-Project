@@ -1,0 +1,548 @@
+mysql> USE TEST;
+Database changed
+mysql> CREATE DATABASE PROJECT;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> USE PROJECT;
+Database changed
+mysql> CREATE TABLE users(
+    ->     user_id INT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     email VARCHAR(50),
+    ->     phone VARCHAR(15),
+    ->     date_of_birth DATE,
+    ->     gender VARCHAR(10)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE dietitians(
+    ->     dietitian_id INT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     email VARCHAR(50),
+    ->     phone VARCHAR(15),
+    ->     specialization VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE diet_plans(
+    ->     diet_plan_id INT PRIMARY KEY,
+    ->     plan_name VARCHAR(50),
+    ->     start_date DATE,
+    ->     end_date DATE,
+    ->     calorie_goal INT,
+    ->     description VARCHAR(100),
+    ->     dietitian_id INT,
+    ->     FOREIGN KEY(dietitian_id)
+    ->     REFERENCES dietitians(dietitian_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE user_diet_plan(
+    ->     assignment_id INT PRIMARY KEY,
+    ->     user_id INT,
+    ->     diet_plan_id INT,
+    ->     assigned_date DATE,
+    ->     FOREIGN KEY(user_id)
+    ->     REFERENCES users(user_id),
+    ->     FOREIGN KEY(diet_plan_id)
+    ->     REFERENCES diet_plans(diet_plan_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE meals(
+    ->     meal_id INT PRIMARY KEY,
+    ->     meal_type VARCHAR(30),
+    ->     meal_time TIME,
+    ->     calories INT,
+    ->     diet_plan_id INT,
+    ->     FOREIGN KEY(diet_plan_id)
+    ->     REFERENCES diet_plans(diet_plan_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE food_items(
+    ->     food_item_id INT PRIMARY KEY,
+    ->     food_name VARCHAR(50),
+    ->     unit VARCHAR(20),
+    ->     calories INT,
+    ->     meal_id INT,
+    ->     FOREIGN KEY(meal_id)
+    ->     REFERENCES meals(meal_id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO users VALUES
+    -> (1,'Mahima','mahima@gmail.com','9876543210','2003-04-10','Female'),
+    -> (2,'Rahul','rahul@gmail.com','9876543211','2000-05-15','Male'),
+    -> (3,'Sneha','sneha@gmail.com','9876543212','2001-08-20','Female'),
+    -> ^C
+mysql> INSERT INTO users VALUES
+    -> (1,'Mahima','mahima@gmail.com','9876543210','2003-04-10','Female'),
+    -> (2,'Rahul','rahul@gmail.com','9876543211','2000-05-15','Male'),
+    -> (3,'Sneha','sneha@gmail.com','9876543212','2001-08-20','Female'),
+    -> (4,'Arjun','arjun@gmail.com','9876543213','1999-11-12','Male'),
+    -> (5,'Pooja','pooja@gmail.com','9876543214','2002-02-12','Female'),
+    -> (6,'Kiran','kiran@gmail.com','9876543215','1998-05-22','Male'),
+    -> (7,'Ravi','ravi@gmail.com','9876543216','2001-07-18','Male'),
+    -> (8,'Anjali','anjali@gmail.com','9876543217','2000-09-10','Female'),
+    -> (9,'Vikram','vikram@gmail.com','9876543218','1999-12-25','Male'),
+    -> (10,'Keerthi','keerthi@gmail.com','9876543219','2003-03-15','Female');
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO dietitians VALUES
+    -> (1,'Dr. Priya','priya@gmail.com','9999991111','Weight Loss'),
+    -> (2,'Dr. Kiran','kiran.doc@gmail.com','9999992222','Muscle Gain'),
+    -> (3,'Dr. Meena','meena@gmail.com','9999993333','Diabetic Diet'),
+    -> (4,'Dr. Suma','suma@gmail.com','9999994444','Weight Gain'),
+    -> (5,'Dr. Ravi','ravi.doc@gmail.com','9999995555','Sports Nutrition'),
+    -> (6,'Dr. Anu','anu@gmail.com','9999996666','Pediatric Nutrition'),
+    -> (7,'Dr. Kumar','kumar@gmail.com','9999997777','Heart Health'),
+    -> (8,'Dr. Nisha','nisha@gmail.com','9999998888','Weight Loss'),
+    -> (9,'Dr. Reddy','reddy@gmail.com','9999999999','Fitness Diet'),
+    -> (10,'Dr. Deepa','deepa@gmail.com','9999990000','Clinical Nutrition');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO diet_plans VALUES
+    -> (1,'Weight Loss Plan','2025-01-01','2025-03-31',1500,'Low calorie diet',1),
+    -> (2,'Muscle Gain Plan','2025-01-01','2025-03-31',2500,'High protein diet',2),
+    -> (3,'Diabetic Care Plan','2025-01-01','2025-03-31',1800,'Sugar controlled diet',3),
+    -> (4,'Weight Gain Plan','2025-01-01','2025-03-31',2800,'High calorie diet',4),
+    -> (5,'Sports Diet','2025-01-01','2025-03-31',3000,'Athlete nutrition',5),
+    -> (6,'Kids Nutrition','2025-01-01','2025-03-31',1800,'Nutrition for children',6),
+    -> (7,'Heart Care Plan','2025-01-01','2025-03-31',1700,'Low fat diet',7),
+    -> (8,'Advanced Weight Loss','2025-01-01','2025-03-31',1400,'Strict calorie control',8),
+    -> (9,'Fitness Plan','2025-01-01','2025-03-31',2200,'Balanced diet',9),
+    -> (10,'Clinical Recovery','2025-01-01','2025-03-31',2000,'Recovery nutrition',10);
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO user_diet_plan VALUES
+    -> (1,1,1,'2025-01-05'),
+    -> (2,2,2,'2025-01-07'),
+    -> (3,3,3,'2025-01-10'),
+    -> (4,4,1,'2025-01-15'),
+    -> (5,5,4,'2025-01-12'),
+    -> (6,6,5,'2025-01-15'),
+    -> (7,7,6,'2025-01-17'),
+    -> (8,8,7,'2025-01-20'),
+    -> (9,9,8,'2025-01-22'),
+    -> (10,10,9,'2025-01-25');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO meals VALUES
+    -> (1,'Breakfast','08:00:00',400,1),
+    -> (2,'Lunch','13:00:00',600,1),
+    -> (3,'Dinner','20:00:00',500,2),
+    -> (4,'Breakfast','08:30:00',450,3),
+    -> (5,'Lunch','13:00:00',700,4),
+    -> (6,'Dinner','20:00:00',800,5),
+    -> (7,'Breakfast','08:00:00',350,6),
+    -> (8,'Lunch','13:30:00',500,7),
+    -> (9,'Dinner','20:30:00',450,8),
+    -> (10,'Snack','17:00:00',300,9);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO food_items VALUES
+    -> (1,'Oats','Bowl',150,1),
+    -> (2,'Apple','Piece',80,1),
+    -> (3,'Brown Rice','Plate',250,2),
+    -> (4,'Chicken Breast','200g',300,3),
+    -> (5,'Boiled Eggs','2 Pieces',140,4),
+    -> (6,'Banana Shake','Glass',250,5),
+    -> (7,'Paneer Curry','Plate',350,6),
+    -> (8,'Milk','Glass',120,7),
+    -> (9,'Salad','Bowl',90,8),
+    -> (10,'Almonds','50g',200,10);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM USERS;
++---------+---------+-------------------+------------+---------------+--------+
+| user_id | name    | email             | phone      | date_of_birth | gender |
++---------+---------+-------------------+------------+---------------+--------+
+|       1 | Mahima  | mahima@gmail.com  | 9876543210 | 2003-04-10    | Female |
+|       2 | Rahul   | rahul@gmail.com   | 9876543211 | 2000-05-15    | Male   |
+|       3 | Sneha   | sneha@gmail.com   | 9876543212 | 2001-08-20    | Female |
+|       4 | Arjun   | arjun@gmail.com   | 9876543213 | 1999-11-12    | Male   |
+|       5 | Pooja   | pooja@gmail.com   | 9876543214 | 2002-02-12    | Female |
+|       6 | Kiran   | kiran@gmail.com   | 9876543215 | 1998-05-22    | Male   |
+|       7 | Ravi    | ravi@gmail.com    | 9876543216 | 2001-07-18    | Male   |
+|       8 | Anjali  | anjali@gmail.com  | 9876543217 | 2000-09-10    | Female |
+|       9 | Vikram  | vikram@gmail.com  | 9876543218 | 1999-12-25    | Male   |
+|      10 | Keerthi | keerthi@gmail.com | 9876543219 | 2003-03-15    | Female |
++---------+---------+-------------------+------------+---------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DIETITIANS;
++--------------+-----------+---------------------+------------+---------------------+
+| dietitian_id | name      | email               | phone      | specialization      |
++--------------+-----------+---------------------+------------+---------------------+
+|            1 | Dr. Priya | priya@gmail.com     | 9999991111 | Weight Loss         |
+|            2 | Dr. Kiran | kiran.doc@gmail.com | 9999992222 | Muscle Gain         |
+|            3 | Dr. Meena | meena@gmail.com     | 9999993333 | Diabetic Diet       |
+|            4 | Dr. Suma  | suma@gmail.com      | 9999994444 | Weight Gain         |
+|            5 | Dr. Ravi  | ravi.doc@gmail.com  | 9999995555 | Sports Nutrition    |
+|            6 | Dr. Anu   | anu@gmail.com       | 9999996666 | Pediatric Nutrition |
+|            7 | Dr. Kumar | kumar@gmail.com     | 9999997777 | Heart Health        |
+|            8 | Dr. Nisha | nisha@gmail.com     | 9999998888 | Weight Loss         |
+|            9 | Dr. Reddy | reddy@gmail.com     | 9999999999 | Fitness Diet        |
+|           10 | Dr. Deepa | deepa@gmail.com     | 9999990000 | Clinical Nutrition  |
++--------------+-----------+---------------------+------------+---------------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DIET_PLANS;
++--------------+----------------------+------------+------------+--------------+------------------------+--------------+
+| diet_plan_id | plan_name            | start_date | end_date   | calorie_goal | description            | dietitian_id |
++--------------+----------------------+------------+------------+--------------+------------------------+--------------+
+|            1 | Weight Loss Plan     | 2025-01-01 | 2025-03-31 |         1500 | Low calorie diet       |            1 |
+|            2 | Muscle Gain Plan     | 2025-01-01 | 2025-03-31 |         2500 | High protein diet      |            2 |
+|            3 | Diabetic Care Plan   | 2025-01-01 | 2025-03-31 |         1800 | Sugar controlled diet  |            3 |
+|            4 | Weight Gain Plan     | 2025-01-01 | 2025-03-31 |         2800 | High calorie diet      |            4 |
+|            5 | Sports Diet          | 2025-01-01 | 2025-03-31 |         3000 | Athlete nutrition      |            5 |
+|            6 | Kids Nutrition       | 2025-01-01 | 2025-03-31 |         1800 | Nutrition for children |            6 |
+|            7 | Heart Care Plan      | 2025-01-01 | 2025-03-31 |         1700 | Low fat diet           |            7 |
+|            8 | Advanced Weight Loss | 2025-01-01 | 2025-03-31 |         1400 | Strict calorie control |            8 |
+|            9 | Fitness Plan         | 2025-01-01 | 2025-03-31 |         2200 | Balanced diet          |            9 |
+|           10 | Clinical Recovery    | 2025-01-01 | 2025-03-31 |         2000 | Recovery nutrition     |           10 |
++--------------+----------------------+------------+------------+--------------+------------------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM USER_DIET_PLAN;
++---------------+---------+--------------+---------------+
+| assignment_id | user_id | diet_plan_id | assigned_date |
++---------------+---------+--------------+---------------+
+|             1 |       1 |            1 | 2025-01-05    |
+|             2 |       2 |            2 | 2025-01-07    |
+|             3 |       3 |            3 | 2025-01-10    |
+|             4 |       4 |            1 | 2025-01-15    |
+|             5 |       5 |            4 | 2025-01-12    |
+|             6 |       6 |            5 | 2025-01-15    |
+|             7 |       7 |            6 | 2025-01-17    |
+|             8 |       8 |            7 | 2025-01-20    |
+|             9 |       9 |            8 | 2025-01-22    |
+|            10 |      10 |            9 | 2025-01-25    |
++---------------+---------+--------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM MEALS;
++---------+-----------+-----------+----------+--------------+
+| meal_id | meal_type | meal_time | calories | diet_plan_id |
++---------+-----------+-----------+----------+--------------+
+|       1 | Breakfast | 08:00:00  |      400 |            1 |
+|       2 | Lunch     | 13:00:00  |      600 |            1 |
+|       3 | Dinner    | 20:00:00  |      500 |            2 |
+|       4 | Breakfast | 08:30:00  |      450 |            3 |
+|       5 | Lunch     | 13:00:00  |      700 |            4 |
+|       6 | Dinner    | 20:00:00  |      800 |            5 |
+|       7 | Breakfast | 08:00:00  |      350 |            6 |
+|       8 | Lunch     | 13:30:00  |      500 |            7 |
+|       9 | Dinner    | 20:30:00  |      450 |            8 |
+|      10 | Snack     | 17:00:00  |      300 |            9 |
++---------+-----------+-----------+----------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM FOOD_ITEMS;
++--------------+----------------+----------+----------+---------+
+| food_item_id | food_name      | unit     | calories | meal_id |
++--------------+----------------+----------+----------+---------+
+|            1 | Oats           | Bowl     |      150 |       1 |
+|            2 | Apple          | Piece    |       80 |       1 |
+|            3 | Brown Rice     | Plate    |      250 |       2 |
+|            4 | Chicken Breast | 200g     |      300 |       3 |
+|            5 | Boiled Eggs    | 2 Pieces |      140 |       4 |
+|            6 | Banana Shake   | Glass    |      250 |       5 |
+|            7 | Paneer Curry   | Plate    |      350 |       6 |
+|            8 | Milk           | Glass    |      120 |       7 |
+|            9 | Salad          | Bowl     |       90 |       8 |
+|           10 | Almonds        | 50g      |      200 |      10 |
++--------------+----------------+----------+----------+---------+
+10 rows in set (0.00 sec)
+
+mysql> -- 1. List all diet plans having calorie goal less than 2000.SELECT * FROM DIET_PLANS WHERE CALORIE_GOAL <2000;
+mysql> ^C
+mysql> 1. List all diet plans having calorie goal less than 2000.
+    -> SELECT * FROM DIET_PLANS WHERE CALORIE_GOAL <2000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1. List all diet plans having calorie goal less than 2000.
+SELECT * FROM DIET_PL' at line 1
+mysql> ^C
+mysql> -- 1. List all diet plans having calorie goal less than 2000.
+mysql> SELECT * FROM DIET_PLANS WHERE CALORIE_GOAL <2000;
++--------------+----------------------+------------+------------+--------------+------------------------+--------------+
+| diet_plan_id | plan_name            | start_date | end_date   | calorie_goal | description            | dietitian_id |
++--------------+----------------------+------------+------------+--------------+------------------------+--------------+
+|            1 | Weight Loss Plan     | 2025-01-01 | 2025-03-31 |         1500 | Low calorie diet       |            1 |
+|            3 | Diabetic Care Plan   | 2025-01-01 | 2025-03-31 |         1800 | Sugar controlled diet  |            3 |
+|            6 | Kids Nutrition       | 2025-01-01 | 2025-03-31 |         1800 | Nutrition for children |            6 |
+|            7 | Heart Care Plan      | 2025-01-01 | 2025-03-31 |         1700 | Low fat diet           |            7 |
+|            8 | Advanced Weight Loss | 2025-01-01 | 2025-03-31 |         1400 | Strict calorie control |            8 |
++--------------+----------------------+------------+------------+--------------+------------------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> -- 2. Find the email address of 'Anjali'.
+mysql> SELECT * FROM USERS WHERE NAME = 'ANJALI';
++---------+--------+------------------+------------+---------------+--------+
+| user_id | name   | email            | phone      | date_of_birth | gender |
++---------+--------+------------------+------------+---------------+--------+
+|       8 | Anjali | anjali@gmail.com | 9876543217 | 2000-09-10    | Female |
++---------+--------+------------------+------------+---------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT EMAIL FROM USERS WHERE NAME = 'ANJALI';
++------------------+
+| EMAIL            |
++------------------+
+| anjali@gmail.com |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> -- 3. Display all diet plans created by Dietitian ID = 1
+mysql> select * from diet_plans where dietitian id = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id = 1' at line 1
+mysql> select * from diet_plans where dietitian_id = 1;
++--------------+------------------+------------+------------+--------------+------------------+--------------+
+| diet_plan_id | plan_name        | start_date | end_date   | calorie_goal | description      | dietitian_id |
++--------------+------------------+------------+------------+--------------+------------------+--------------+
+|            1 | Weight Loss Plan | 2025-01-01 | 2025-03-31 |         1500 | Low calorie diet |            1 |
++--------------+------------------+------------+------------+--------------+------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> -- 4.List all dietitians alphabetically.
+mysql> SELECT NAME FROM DIETITIANS ORDER BY NAME;
++-----------+
+| NAME      |
++-----------+
+| Dr. Anu   |
+| Dr. Deepa |
+| Dr. Kiran |
+| Dr. Kumar |
+| Dr. Meena |
+| Dr. Nisha |
+| Dr. Priya |
+| Dr. Ravi  |
+| Dr. Reddy |
+| Dr. Suma  |
++-----------+
+10 rows in set (0.02 sec)
+
+mysql> -- 5. Count how many users are Female.
+mysql> SELECT COUNT(*) FROM USERS WHERE GENDER = 'FEMALE';
++----------+
+| COUNT(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> -- 6. Show the highest calorie diet plan.
+mysql> SELECT MAX(CALORIE_GOAL) AS HIGHTEST_CALORIE_DIET FROM DIET_PLANS;
++-----------------------+
+| HIGHTEST_CALORIE_DIET |
++-----------------------+
+|                  3000 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> -- SELECT *
+mysql> FROM diet_plans
+    -> ORDER BY calorie_goal DESC
+    -> LIMIT 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM diet_plans
+ORDER BY calorie_goal DESC
+LIMIT 1' at line 1
+mysql> SELECT *
+    -> FROM diet_plans
+    -> ORDER BY calorie_goal DESC
+    -> LIMIT 1;
++--------------+-------------+------------+------------+--------------+-------------------+--------------+
+| diet_plan_id | plan_name   | start_date | end_date   | calorie_goal | description       | dietitian_id |
++--------------+-------------+------------+------------+--------------+-------------------+--------------+
+|            5 | Sports Diet | 2025-01-01 | 2025-03-31 |         3000 | Athlete nutrition |            5 |
++--------------+-------------+------------+------------+--------------+-------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> -- 7. List user names with their assigned diet plans.
+mysql> SELECT u.name,
+    ->        d.plan_name
+    -> FROM users u
+    -> JOIN user_diet_plan udp
+    -> ON u.user_id = udp.user_id
+    -> JOIN diet_plans d
+    -> ON udp.diet_plan_id = d.diet_plan_id;
++---------+----------------------+
+| name    | plan_name            |
++---------+----------------------+
+| Mahima  | Weight Loss Plan     |
+| Rahul   | Muscle Gain Plan     |
+| Sneha   | Diabetic Care Plan   |
+| Arjun   | Weight Loss Plan     |
+| Pooja   | Weight Gain Plan     |
+| Kiran   | Sports Diet          |
+| Ravi    | Kids Nutrition       |
+| Anjali  | Heart Care Plan      |
+| Vikram  | Advanced Weight Loss |
+| Keerthi | Fitness Plan         |
++---------+----------------------+
+10 rows in set (0.00 sec)
+
+mysql> -- 8. Total calorie goal assigned to Mahima.
+mysql> select u.name,
+    -> d.calorie_goal
+    -> from users u
+    -> join user_diet_plan udp
+    -> on u.user_id = udp.user_id
+    -> join diet_plans d
+    -> on udp.diet_plan_id = d.diet_plan_id
+    -> where u.name = 'Mahima';
++--------+--------------+
+| name   | calorie_goal |
++--------+--------------+
+| Mahima |         1500 |
++--------+--------------+
+1 row in set (0.00 sec)
+
+mysql> -- 9. Dietitian whose plan has the highest calorie goal.
+mysql> SELECT d.name,
+    ->        dp.plan_name,
+    ->        dp.calorie_goal
+    -> FROM dietitians d
+    -> JOIN diet_plans dp
+    -> ON d.dietitian_id = dp.dietitian_id
+    -> ORDER BY dp.calorie_goal DESC
+    -> LIMIT 1;
++----------+-------------+--------------+
+| name     | plan_name   | calorie_goal |
++----------+-------------+--------------+
+| Dr. Ravi | Sports Diet |         3000 |
++----------+-------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> -- 10.Display users assigned during January 2025
+mysql> SELECT *
+    -> FROM user_diet_plan
+    -> WHERE assigned_date
+    -> BETWEEN '2025-01-01' AND '2025-01-31';
++---------------+---------+--------------+---------------+
+| assignment_id | user_id | diet_plan_id | assigned_date |
++---------------+---------+--------------+---------------+
+|             1 |       1 |            1 | 2025-01-05    |
+|             2 |       2 |            2 | 2025-01-07    |
+|             3 |       3 |            3 | 2025-01-10    |
+|             4 |       4 |            1 | 2025-01-15    |
+|             5 |       5 |            4 | 2025-01-12    |
+|             6 |       6 |            5 | 2025-01-15    |
+|             7 |       7 |            6 | 2025-01-17    |
+|             8 |       8 |            7 | 2025-01-20    |
+|             9 |       9 |            8 | 2025-01-22    |
+|            10 |      10 |            9 | 2025-01-25    |
++---------------+---------+--------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> -- 11. Food items never assigned to any meal.
+mysql> SELECT f.food_name
+    -> FROM food_items f
+    -> LEFT JOIN meals m
+    -> ON f.meal_id = m.meal_id
+    -> WHERE m.meal_id IS NULL;
+Empty set (0.00 sec)
+
+mysql> -- 12. Total food items available in each meal.
+mysql> SELECT m.meal_type,
+    ->        COUNT(f.food_item_id) AS total_food_items
+    -> FROM meals m
+    -> JOIN food_items f
+    -> ON m.meal_id = f.meal_id
+    -> GROUP BY m.meal_type;
++-----------+------------------+
+| meal_type | total_food_items |
++-----------+------------------+
+| Breakfast |                4 |
+| Lunch     |                3 |
+| Dinner    |                2 |
+| Snack     |                1 |
++-----------+------------------+
+4 rows in set (0.01 sec)
+
+mysql> -- 13.User having the highest calorie diet plan.
+mysql> select u.name,dp.plan_name,dp.calorie_goal
+    -> from users u 
+    -> join user_diet_plan udp
+    -> on u.user_id = udp.user_id
+    -> join diet_plans dp
+    -> on udp.diet_plan_id = dp.diet_plan_id;
++---------+----------------------+--------------+
+| name    | plan_name            | calorie_goal |
++---------+----------------------+--------------+
+| Mahima  | Weight Loss Plan     |         1500 |
+| Rahul   | Muscle Gain Plan     |         2500 |
+| Sneha   | Diabetic Care Plan   |         1800 |
+| Arjun   | Weight Loss Plan     |         1500 |
+| Pooja   | Weight Gain Plan     |         2800 |
+| Kiran   | Sports Diet          |         3000 |
+| Ravi    | Kids Nutrition       |         1800 |
+| Anjali  | Heart Care Plan      |         1700 |
+| Vikram  | Advanced Weight Loss |         1400 |
+| Keerthi | Fitness Plan         |         2200 |
++---------+----------------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> select u.name,dp.plan_name,dp.calorie_goal
+    -> from users u 
+    -> join user_diet_plan udp
+    -> on u.user_id = udp.user_id
+    -> join diet_plans dp
+    -> on udp.diet_plan_id = dp.diet_plan_id
+    -> order by dp.calorie_goal desc
+    -> limit 1;
++-------+-------------+--------------+
+| name  | plan_name   | calorie_goal |
++-------+-------------+--------------+
+| Kiran | Sports Diet |         3000 |
++-------+-------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> -- 14. Dietitian managing the maximum number of plans.
+mysql> SELECT d.name,
+    ->        COUNT(dp.diet_plan_id) AS total_plans
+    -> FROM dietitians d
+    -> JOIN diet_plans dp
+    -> ON d.dietitian_id = dp.dietitian_id
+    -> GROUP BY d.name
+    -> ORDER BY total_plans DESC
+    -> LIMIT 1;
++-----------+-------------+
+| name      | total_plans |
++-----------+-------------+
+| Dr. Priya |           1 |
++-----------+-------------+
+1 row in set (0.00 sec)
+
+mysql> -- 15.Average calorie goal of all diet plans.
+mysql> select avg(calorie_goal) from diet_plans;
++-------------------+
+| avg(calorie_goal) |
++-------------------+
+|         2070.0000 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> -- 16.Food item with highest calories.
+mysql> select max(calories) as highest_calories from food_items;
++------------------+
+| highest_calories |
++------------------+
+|              350 |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> select food_name,calories from food_items order by calories desc limit 1;
++--------------+----------+
+| food_name    | calories |
++--------------+----------+
+| Paneer Curry |      350 |
++--------------+----------+
+1 row in set (0.00 sec)
+
